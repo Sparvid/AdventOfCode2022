@@ -37,6 +37,6 @@ public class Calories {
             System.err.println(filename + " does not exist!");
         }
     }
-
     
 }
+
