@@ -3,13 +3,29 @@ public class CalorieRanking {
     private int second;
     private int third;
 
-    
+    public int getFirst() {
+        return this.first;
+    }
+
+    public int getSecond() {
+        return this.second;
+    }
+
+    public int getThird() {
+        return this.third;
+    }
+
+    public CalorieRanking() {
+        this.first = 0;
+        this.second = 0;
+        this.third = 0;
+    }
 
     public int getSumOfTopThree() {
         return this.first + this.second + third;
     }
 
-    public void compare(int elfsCalories) {
+    public void insert(int elfsCalories) {
         if (elfsCalories > this.first) {
             this.third = this.second;
             this.second = this.first;
@@ -23,4 +39,5 @@ public class CalorieRanking {
             this.third = elfsCalories;
         }
     }
+
 } 
