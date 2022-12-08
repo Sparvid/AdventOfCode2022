@@ -31,12 +31,12 @@ public class Calories {
 
                 
             }
+            
         System.out.println(maxCalories);
 
         } catch (FileNotFoundException e) {
             System.err.println(filename + " does not exist!");
         }
     }
-
-    
+ 
 }

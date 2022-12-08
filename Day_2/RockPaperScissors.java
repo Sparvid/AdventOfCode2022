@@ -22,8 +22,9 @@ public class RockPaperScissors {
                 String character = sc.next();
                 String character2 = sc.next();
 
-                playersShape = playersShape.getShape(character2);
                 opponentsShape = opponentsShape.getShape(character);
+                playersShape = playersShape.shapeForWantedResult(opponentsShape, character2);
+                
 
                 scoreSum = scoreSum + playersShape.roundScore(playersShape, opponentsShape);
                 
@@ -39,6 +40,8 @@ public class RockPaperScissors {
 }
 
 abstract class Shape {
+    abstract public int play(Shape shape);
+    abstract public int getScore();
 
     public int roundScore(Shape playersShape, Shape opponentsShape) {
         return playersShape.getScore() + playersShape.play(opponentsShape);
@@ -57,11 +60,39 @@ abstract class Shape {
         }
         assert(false);
         return null;
-        
+    }
+
+    public Shape shapeForWantedResult(Shape opponentsShape, String code) {
+        if (opponentsShape instanceof Rock) {
+            if (code.equals("X")) {
+                return new Scissors();
+            }
+            else if (code.equals("Y")) {
+                return new Rock();
+            }
+            else return new Paper();
+        }
+        else if (opponentsShape instanceof Paper) {
+            if (code.equals("X")) {
+                return new Rock();
+            }
+            else if (code.equals("Y")) {
+                return new Paper();
+            }
+            else return new Scissors();
+        }
+        else {
+            if (code.equals("X")) {
+                return new Paper();
+            }
+            else if (code.equals("Y")) {
+                return new Scissors();
+            }
+            else return new Rock();
+        }
     }
     
-    abstract public int play(Shape shape);
-    abstract public int getScore();
+    
 }
 
 class Rock extends Shape {
