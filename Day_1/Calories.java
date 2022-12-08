@@ -12,15 +12,17 @@ public class Calories {
 
         try (Scanner sc = new Scanner(new File(filename))) {
 
-            int maxCalories = 0;
             int calorieCounter = 0;
+            CalorieRanking top3 = new CalorieRanking();
+
+
 
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 
                 if (line.isBlank()) {
-                    if (calorieCounter > maxCalories) {
-                        maxCalories = calorieCounter;
+                    if (calorieCounter > top3.getThird()) {
+                        top3.insert(calorieCounter);
                     }
                     calorieCounter = 0;
                 }
@@ -31,12 +33,15 @@ public class Calories {
 
                 
             }
-            
-        System.out.println(maxCalories);
+        System.out.println("Most calories: " + top3.getFirst());
+        System.out.println("Second most calories: " + top3.getSecond());
+        System.out.println("Third most calories: " + top3.getThird());
+        System.out.println("Sum of top 3 elves' calories: " + top3.getSumOfTopThree());
 
         } catch (FileNotFoundException e) {
             System.err.println(filename + " does not exist!");
         }
     }
- 
+    
 }
+
