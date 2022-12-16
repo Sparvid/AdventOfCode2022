@@ -1,0 +1,66 @@
+------------------ K30: Gränssnitt mellan moduler ---------------
+
+Vad är modularisering?
+
+	Dela upp sin kod i delar, istället för att ha en fil med flera 1000 rader kod.
+
+Varför är det viktigt?
+
+	Det underlättar. Det är lättare att hålla koll på sin kod samt underhålla (bugfixa tex) den.
+	Lättare att hitta en funktion i en fil som har 10 funktioner än en fil som har 100.
+
+*visa vår modulariseringsstrategi (fina ritningen)
+
+Vilka förändringar gjorde vi när vår förståelse i programmet fördjupades?
+
+Vi startade med samma moduler utan pilar.
+Flyttade saker från db.c och old_utils.c till nya utils.c
+Annars startade vi med en modularisering som funkade bra hela vägen.
+
+------------------ K31: Coupling & cohesion ---------------------
+
+Vad är coupling?
+
+Vill man ha hög eller låg coupling?
+
+*Var i vårt program kan vi visa hög eller låg coupling?
+
+Vad är cohesion?
+
+Vill man ha hög eller låg cohesion?
+
+*Var i koden kan vi visa hög eller låg cohesion?
+
+	hög cohesion i generic_data_structures.h där alla funktioner bygger eller förstör våra datastrukturer.
+	låg i business_logic.h där vi opererar på olika delar av databasen (carts, merch)
+
+Har vi gjort motiverade ändringar i vår kod baserat på detta?
+
+Har vi exempel på ställen vi kunde ändrat till något bättre med tanke på detta?
+
+	business_logic.c skulle med fördel kunnat delas upp i fler moduler, tex cart och merch-grejer separat.
+	alternativt skulle det vara en dålig idé för att det skulle bli hög coupling, men kanske också hög cohesion? Värt/inte värt?
+
+------------------ K32: Separation of concerns  -----------------
+
+Vad är separation of concerns?
+
+Hur relaterar det till coupling och cohesion?
+
+*Var i vår kod har vi exempel/motexempel på detta?
+
+	Om vi vill ändra något i user_interface så är det bara där vi behöver ändra det.
+
+Vad är aspektorienterad programmering?
+
+	Man lägger till beteende separat från koden, så att man inte behöver bry sig om beteendet när koden kör, men det tar han om det ändå.
+	
+
+Hur relaterar aspektorienterad programmering till separation of concerns?
+
+
+------------------ Z101: Inlupp 2 -------------------------------
+
+
+
+

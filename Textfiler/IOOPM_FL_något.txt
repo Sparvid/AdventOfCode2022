@@ -1,0 +1,104 @@
+Minneshantering och Skräpsamling
+
+Det allokerade minnet kopplas ihop. Första blocket pekar till andra blocket osv.
+På samma sätt länkas det lediga minnet ihop. Kan ses som en Used-lista och en Free-lista.
+
+Vill vi FRIGÖRA ur Used-listan så:
+
+1. Länka ur Used-listan
+2. Länka in i Free-listan
+
+Vill vi ALLOKERA minne så:
+
+1. Hitta ett block i Free-listan som är tillräckligt stort.
+2. Länka ur Free-listan
+3. Länka in i Used-listan
+
+FRAGMENTERING är då summan av fria block är av en viss storlek men de blocken är mindre, ligger alltså utspridda.
+
+
+Dubbellänkad lista med båda Free- och Used-block. Overheaden blir större, men operationer blir snabbare.
+
+Vems ansvar är det att städa bort data. Kan få minnesläckage eller dangling pointer om free inte görs/görs.
+
+-- Fördelen med automatisk minneshantering.
+
+Vi behöver inte fundera på om det finns andra pekare kvar när vi är klara med ett object.
+Enda nackdelen: Prestandakonstnader.
+
+GARBAGE COLLECTION
+
+-- Reference counting
+
+Alla objekt har en refcount som räknar hur många pekare objektet har TILL sig.
+Så fort refcounten blir 0 kan objektet frigöras.
+Problemet är cykliska referenser.
+Man kan göra Reference counting som huvud-GC, och sen köra Tracing-GC för att bli av med cykler
+
+
+
+-- Tracing
+
+Rötterna är variablerna som finns på stacken.
+Därifrån gör vi en DFS och markerar alla levande objekt.
+Sedan går vi igenom heapen och tar bort de som är döda.
+Minneshanteraren måste ha en lista till alla objekt för att kunna hitta de döda. Tillkommer en overhead.
+
+Fördel: återanvänder allt, t.o.m cykliska referenser.
+
+-- Defragmentation
+
+När en skräpsamlare rensar bort döda objekt kan den lägga de levande efter varandra i minnet.
+Alltså flyttar objekt mellan pages.
+Fördelar: Ligger direkt efter varandra i minnet. Finns nu större delar lediga för andra program.
+
+Har en frontier som pekar för början av de levande objekten. När det frigörs så flyttas den fram och därmed finns det alltid minne att allokera bakom den.
+
+-- Weak generational hypothesis
+
+Unga objekt dör fort
+Äldre objekt lever längre
+
+-- Svag referens
+
+Referens som inte håller håller ett objekt vid liv
+
+LATENCY
+
+Hur lång tid något tar
+*Hur länge får vi vänta när vi behöver samla skräp?
+
+Responsivt, men kanske inte får lika mycket gjort över tid.
+
+THROUGHPUT
+
+Hur mycket arbete kan vi få gjort över tid.
+
+JITTER 
+
+Variation i Latency kallar jitter. Högt jitter gör det svårt att förutsäga programmets responstid.
+Om en GC tar kort tid ibland och lång tid ibland så har vi högt jitter.
+Man kanske aldrig vill ha en paus som är längre en 5 ms.
+
+UNDER HUVEN PÅ JVM (N40)
+
+I en .class-fil:
+
+massa olika fält. Första fältet magic; CAFEBABE (som berättar att det är en klassfil)
+
+JVM är en stackmaskin. Som varvar data och operationer.
+javap -c Simulator
+
+Javakompilatorn är optimerade för att kompilera vanlig kod. Kortare men krånglig kod är inte alltid effektivare.
+
+JUST IN TIME-KOMPILERING
+
+försöker tillfredsställa effektivitet och platformsoberoende
+Om vi märker att en viss kod används ofta så kan vi spara maskingkoden och köra den när vi stöter på det.
+
+Pröva stänga av JIT-kompilering med -Xint
+
+time java Fib 43
+
+VisualVM är ett externt verktyg för profilering
+jshell??

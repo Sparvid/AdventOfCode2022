@@ -1,0 +1,15 @@
+----------------------- P45: Gör en informell kodgranskning under fas 1 ------------------------
+
+visa kod och våra kommentarer i issue tracker
+
+----------------------- P47: Åtgärda defekter efter en kodgranskning ---------------------------
+
+Visa vår koden vi ändrade och testerna vi skrev (i google docs finns vår dokumentation)
+
+----------------------- M39: Pekare till pekare ------------------------------------------------
+
+entry_t **buckets i hash_table.c gör så att vi kan rezisa antal buckets.
+
+Visa kod och ritning
+
+

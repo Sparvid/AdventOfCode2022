@@ -1,0 +1,89 @@
+------------------ I23: Undantagshantering ---------------------
+
+Vad är ett kontrollerat unddantag?
+
+	Fel som upptäcks när koden kompileras. Användaren får då ett meddelande att det saknar en parentes eller IOexception?
+	Sånt som man kan förvänta sig hända
+	**Visa i Calculator.java
+	
+Vad är ett okontrollerat undantag?
+
+	Fel som uppstår när koden körs. Koden kompilerar och något går snett när det kör.
+	Sånt som inte ska kunna ske, då är något fel.
+
+Vad innebär det att fånga undantag?
+
+	Catch, där vi säger att om vi får ett visst undantag så vill vi göra en speciell grej (förmodligen felmeddelande)
+
+Är det någonsin relevant att fånga ett NullPointerException?
+
+	Kanske, men det är ett ganska rimligt fel att krasha programmet för.
+	Om vi tycker det är okej att få nullpointer och inte vill krascha programmet.
+
+Vilka fel kan hanteras utan att programmet borde krasha?
+
+	Undantag som användaren av programmet kan skapa. Så felaktig input vill vi skriva 	felmeddelande och prompta ny input.
+
+Vad innebär det att kasta undantag?
+
+	Att skapa ett error. Avbryter programmets exekvering. Ger över kontrollen till Javas hantering eller hantera själv.
+
+
+------------------ I24: Olika metoder för felhantering ---------
+
+* Att returnera speciella ogiltiga värden som signalerar fel (till exempel NULL)
+
+Har man en funktion som returnerar NULL som fel, så måste andra funktioner som använder funktionen ta hänsyn till det.
+Och då krävs det att användaren känner till implementationen (genom dokumentation kanske)
+
+* "Crash don’t trash"
+
+Idén att vi hellre vill att programmet ska krascha hellre än göra fel saker! Visa negativt exempel.
+
+* Defensiv programmering (Visa iterator)
+
+asserts i inlupp 1. Då vi bara för säkerhets skull kontrollerar att inget är galet, även fast vi aldrig borde komma dit.
+Lite övergripande.
+
+* Undantagshantering (till exempel i Java)
+
+Ett strukturerat sätt att ta hand om olika slags fel.
+
+
+
+----------------- I25: Egendefinierade undantag ---------------
+
+Visa. alla fel exception som skulle kunna uppstå måste vi ta hand om. För att användaren aldrig ska får se dem
+Och IO är så svårt att förutsäga så därför hjälper kompilatorn till.
+
+
+----------------- G17: Nästlade och inre klasser --------------
+
+Vad är en nästlad klass?
+
+	Det är en static-klass definierad i en annan klass (Se commands)
+	Dessa klasser har inte tillgång till privata delar av den klass den bor i.
+	Den är bara en medlem i sin yttre klass.
+
+Vad är en inre klass?
+
+	Det är en klass som är definierad i en annan klass (Se Node i Queue)
+	Den är non-static och har därmed tillgång till privata grejer i klassen den bor i.
+
+Varför har jag valt vilket sort?
+
+	Node kunde lika gärna ha varit en static nästlad klass
+	I commands är static nästlade klasser för att de inte behöver tillgång till grejer hos yttre klassen
+	Commands var ett bättre designval.
+	
+Diskutera denna skillnad och hur den uttrycks i Java
+
+	En nod tillhör alltid en specifik kö, så det är logiskt att alltid låta de hänga ihop.
+	Men en instans av Quit hör inte till någon speciell instans av ett Command, så därför räcker det med att den klassen är i
+	Commands-klassen.
+	
+	Static betyder den inte hör till ett objekt av yttre klassen
+	
+	I Queue så måste jag ha ett Queue-objekt för att kunna skapa ett node-objekt. Därför hör de till varandra.
+
+

@@ -1,0 +1,81 @@
+J27 -- MANUELL MINNESHANTERING
+
+GÖRA - KÖR VALGRIND PÅ INLUPP 1, VISA CALLOC FÖR hash_table_create() OCH entry_create, SAMT KORRESPONDERANDE FREE()'S
+
+
+* Vad är minnesläckage?
+
+Minnesläckage är minnesarea som vi inte kan komma åt (och därmed inte frigöra)
+
+* Hur uppstår det?
+
+Genom att ett program allokerar minne och sedan aldrig frigör det (eller tappar bort pekare??)
+
+* Vilken del av ett program ansvarar för att frigöra minne?
+
+Programmer själv, som har allokerat och använt det. Bra att ha delfunktioner som tar hand om det (destroy_bucket())
+Alla kallelser av free???
+
+* När avgör man att en bit allokerat minne är “färdiganvänt” och går att frigöra?
+
+När datan inte längre behöver användas, är "färdiganvänt". T.ex quitta ut ur en meny, där vi kanske sparar datan någon annan stans
+
+* Vad kan hända om ett allokerat utrymme frigörs “för tidigt”?
+
+Dinglande pekare. Inte farligt i sig, men farlig att användas, 
+för det kan ligga vad som helst i minnet på den platsen efter vi frigjort den
+
+* På vilket sätt hjälper valgrind dig att undvika minnesläckage?
+
+Valgrind håller reda på minnet som vi allokerat i programmet och hur mycket av det vi frigjord.
+Även om vi försöker läsa eller skriva till minne UTANFÖR vårt allokerade minne.
+
+----------------------------------------------------------------------------------------
+
+M36 -- C'S ARRAY-NOTATION OCH PEKARSEMANTIK
+
+GÖRA - MÖJLIGTVIS PRINTA MED DE OLIKA NOTATIONERNA OCH VISA ATT DET GER SAMMA RESULTAT
+
+Tips:
+
+    * Argumentvektorn till main-funktionen (argv[])
+    Är bara en array av stängar som skickas med i main-funktionen. Där varje sträng separeras av mellanslag.
+
+    Vad översätts arr[42] till?
+
+        Element med index 42 i arrayen arr. Detta är semantiskt ekvivalent med *(arr + 42) == *(42 + arr) == 42[arr] (som en offset)
+
+    Vad översätts 42[arr] till? (detta kompilerar faktiskt, trots att det ser vansinigt ut)
+
+-----------------------------------------------------------------------------------------
+
+M37 -- ANVÄND PEKARE FÖR ATT SKAPA LÄNKADE STRUKTURER
+
+
+GÖRA - VISA VÅR hash_table_create() OCH RITA UPP?
+
+Fundera gärna på vad det finns för fördelar med att ha kontroll över länkningen! 
+* Vad kan du göra med en länkad lista i C som du inte kan göra i Haskell?
+
+Hoppa direkt till index 
+
+* Fördelar med kontroll över länkningen
+
+Kan lägga till ett element genom att bara flytta på en pekare. 
+Kan också tex peka till en annan länkad lista genom att bara flytta en eller två pekare.
+
+
+-----------------------------------------------------------------------------------------
+
+Q49 -- ENHETSTESTNING
+
+skriva fler tester??? För edge cases
+
+GÖRA - VISA VÅRA CUNIT-TESTER
+
+
+
+
+
+
+

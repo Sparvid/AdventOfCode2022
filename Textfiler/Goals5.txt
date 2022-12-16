@@ -1,0 +1,107 @@
+----------------------- J26 Stack vs Heap ------------------------------------
+
+Vi sparade result på stacken i hash_table_keys och det ledde till invalid rea när vi körde testen.
+Så vi returnerade en pekare till en array vi sparade på stacken, vilket bara var skräp när funktionen hade returnerat och försökte läsa
+arrayen.
+
+*Prestanda
+
+Kostar att calloca och freea? Så för mycket på heapen kanske skadar prestandan.
+
+***************LÄS PÅ OM STORLEK OCH PRESTANDA***********************
+
+Heapen är mycket större, där vill vi lagra stora saker.
+Men det kostar prestanda att hitta någonstans i heapen det finns "kontinuerlig" plats
+för det man vill allokera, samt att frigöra.
+
+Stacken har bättre prestanda, för att vi inte manuellt behöver allokera och frigöra minne,
+utan bara flytta stack-pekaren.
+
+
+
+
+
+
+------------------ M38 Värdeöverföring via pekare -----------------------------
+
+ioopm_ht_lookup_v2 returnerar ett value (sträng) som tillhör key. Då ändrar vi via pekare värdet på result_ptr till true.
+Om key inte finns i ht, sätter vi result_ptr till false och vi returnerar NULL.
+
+
+
+
+
+
+
+----------------- E10: Implementera genericitet genom void-pekare ------------------------
+
+Vad är genericitet?
+
+SVAR: C's verision av polymorfism. Vi tillåter ett värde att vara (en av) flera typer.
+
+Varför kan det vara bra?
+
+SVAR: 
+
+*Visa hur vi använt genericitet i vår hash_table_apply_to_all?? Där vår extra (beroende på vad vi vill göra)
+Där använder vi void-pekare i predicate. Kan skicka in en int x och kolla vilka keys som är delbara med x
+Eller skicka in en sträng och säga att alla keys som är delbara med tre byts ut mot strängen.
+
+
+---------------- A1 Procedurell abstraktion -------------------------------------------------
+
+* Varför det är vettigt att identifiera liknande mönster i koden och extrahera dem och kapsla in dem i en enda procedur som kan anropas istället för upprepningarna?
+
+SVAR: Slipper skriva samma kod många gånger, om man vill ändra implementationen behöver man bara ändra på ett ställe
+vilket minskar risken för slarvfel och buggar.
+
+* Abstraktioner kan “läcka”. Vad betyder det och vad får det för konsekvenser?
+
+SVAR: Om man måste känna till hur en abstraktion funkar för att använda den, så har det läckt.
+
+
+*Vad är skillnaderna mellan “control abstraction” (ex. if-satsen är en abstraktion) och “data abstraction” (ex. en lista är en abstraktion)? Du kan läsa om dessa koncept på t.ex.http://en.wikipedia.org/wiki/Abstraction_(computer_science) (Länkar till en extern sida.).
+
+SVAR: Data abstraction, vår lista är bara en lista för oss (konceptuellt). Implementeringen är inte relevant för oss.
+Control abstraction, om en funktion ska göra antingen eller. Så behöver vi inte bry oss om HUR den bestämmer vilket den gör.
+
+alt: bryr oss inte om HUR en funktion fungerar, bara att den returnerar rätt sak.
+
+
+*Ge exempel på procedurell abstraktion i ditt program! Kritisera den! Kan den förbättras?
+
+SVAR: I hash_table_any så kallar vi på hash_table_keys som returnerar en länkad lista av keys. Men freear inte. Så användaren måste själv freea (läckt absraktion).
+
+Vår any förutsätter att keys och values lägger sina värden i samma ordning. (Läcker?)
+
+I all, any hade vi kunnat använda vår iterator istället för att loopa.
+
+*Vad är den kortfattade beskrivningen av vad funktionerna gör?
+
+SVAR: 
+
+
+Ger namnen på funktionerna en bra ledning om vad funktionerna gör?
+
+
+
+Finns det exempel på läckande abstraktioner, dvs. där den som anropar funktionen måste känna till hur funktionen faktiskt är implementerad för att fungera, eller förutsätter en viss implementation?
+
+Ja, se tidigare
+
+Låt
+, och vara funktioner. och är delar av samma bibliotek och använder
+i sin implementation. Skiljer sig nivån av abstraktion mellan dessa på något sätt? Hur?
+
+SVAR: f2 har ett steg högre abstraktionsnivå för att den använder sig av en annan funktion, det gör inte f1.
+
+Är abstraktion möjlig utan inkapsling? (Bonusfråga)
+
+
+
+
+
+
+
+
+

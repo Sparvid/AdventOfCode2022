@@ -15,8 +15,8 @@ public class PropertyCounter {
         try (Scanner sc = new Scanner(new File(filename))) {
 
             while (sc.hasNext()) {
-                String character = sc.next(); // för en charactär
                 String line = sc.nextLine(); // för en hel rad
+                int stringLength = line.length();
 
                 int c = Integer.parseInt(line); // parsa en int
                 

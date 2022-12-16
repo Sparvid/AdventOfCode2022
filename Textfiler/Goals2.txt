@@ -1,0 +1,69 @@
+-------------------- F13 Iteration vs rekursion----------------------------
+
+* Skriv en rekursiv verision av någon destroy
+
+*Är någon av lösningarna bättre (vad betyder bättre)?
+Minneseffektivt, tidseffektivt, intuitivt (lätt att skriva), lätt att läsa, spara text i koden.
+
+Iterativt bättre för minnet än vanlig rekursion, där vi behöver spara värden tills vi når basfall.
+Iteration sparar istället några värden och kör en funktion om och om igen.
+
+Vissa funktioner är mer intuitiva som rekursiva, som factorial och fibonacci.
+Strukturer kan vara rekursivt definierade och då kanske operationer på dem är rimligare som rekursiva
+
+Om man behöver "minnas" saker så är rekursion bra.
+
+
+
+
+-------------------- F14 Svansrekursion -----------------------------------
+
+* -||- med svansrekursion
+
+* Varför behövs ingen stack för att lagra temporära värden?
+För att vi måste spara värden medans vi räknar ut resten. I vanlig rekursion.
+
+I svansrekursion har vi inget värde som väntar, utan att info som behövs skickas med
+, så den kan köra på samma stackframe
+
+*Visa i assembly att vi har constant stack space!!
+
+*Är svansrekursiva funktioner iterativa?? 
+
+I icke-svanskrekursiva så behåller vi "spår" av det vi gjort.
+Men i iterativa och svansrekursiva funktioner försvinner det, så på sätt och vis.
+
+
+
+-------------------- H19 Identitet vs ekvivalens --------------------------
+
+*Vad menas med att två objekt/värden är identiska?
+
+Att det är SAMMA värde.
+
+*Vad menas med att de är ekvivalenta?
+
+Att de HAR samma värde.
+
+*Är det här en viktig distinktion i ett funktionellt programspråk som Haskell?
+
+Förmodligen inte? Det är viktigt när vi jobbar med minne.
+
+
+
+
+-------------------- M38 Värdeöverföring via pekare -----------------------
+
+(Nedåt i stacken, hör bra ihop med J26??)
+
+-------------------- M39 Pekare till pekare -------------------------------
+
+(Kanske lite jobbig iochmed att vi inte har en sådan struktur)
+
+-------------------- Q49 Enhetstestning -----------------------------------
+
+(Om vi kan motivera att vi valt egna tester)
+
+-------------------- R52 Debugging ----------------------------------------
+
+(

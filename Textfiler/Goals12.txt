@@ -1,0 +1,174 @@
+------------------ A8: Gränssnitt ---------------------------
+
+Varför vill man separera gränssnitt från implementation?
+
+	För att om vi vill ändra hur en funktion fungerar slipper vi gå in i varje subklass och ändra.
+	Vi ändrar istället bara i den klassen som implementerar interfacet (vår funktion)
+	
+*Visa Visitor och EvaluationVisitor
+
+Varför var det vettigt att göra ett interface här? 
+
+	För att vi kan nu kan vi skapa fler funktioner (i en fil per funktion)
+	Som implementerar Visitor. Istället för i varje subklass vi vill ha den.
+	
+	
+----------------- H21: Abstrakta klasser, metoder och interface -----------------
+
+Vad är en abstrakt klass?
+
+	En klass som inte går att instansiera utan man måste instansiera någon icke-abstract subklass.
+
+Vad är en abstrakt metod?
+
+	Samma sak, går inte att kalla på. Måste overridas i en subklass.
+
+Hur skiljer de sig?
+
+	En för en klass, går inte att skapa ett objekt som är bara det,
+	en för metoder, går inte för ett objekt av klass x att kalla på metoden, måste specifiera
+
+Hur är de lika?
+
+	Båda handlar om att kapsla in?? Abstrahera?
+	De måste specifieras. Alltså ärvas eller overridas.
+
+När används de och vad har de för konsekvenser på programmen i vilka de används?
+
+	Bidrar till abstraktion. 
+    *Visa att vi har båda
+		
+	
+Varför är multipelt arv mellan interface tillåtet och väldefinierat medan multipelt implementationsarv inte är det? (I Java, alltså.)
+
+	Eftersom vi kan implementera flera interface så blir det som multipelt arv.
+	Implementerar vi två default-metoder med samma namn så MÅSTE vi overrida den.
+	Detta problem stöter vi inte på med abstrakta klasser då vi inte kan ärva från fler än en klass.
+
+
+Vilka slags metoder kan finnas i ett interface?
+
+	Interfaces kan bara ha abstrakta metoder och default (?)-metoder.
+	En default-metod gör något, men kan skrivas över i klasser som implementerar interfacet.
+	Default måste inte skrivas över.
+	Abstrakta metoder måste specifieras.
+	
+	
+Kan man lägga till funktioner i en klass, utöver de som finns i interfacet?
+
+----------------- N40: Kompilering, länkning och interpretering ----------------
+
+Vad är kompilering?
+
+    Kompilering innebär att transformera kod som är läsbar för oss människor till maskinkod som datorn kan läsa av och i sin tur köra. 
+
+Hur fungerar det i c?
+
+    Kompilering i C använder sig av fyra steg:
+    Pre-processing -> Compiling -> Assembling -> Linking
+
+    Pre-processing
+    Tar bort kommentarer, expanderar macros, inkluderar filer som står med #include, och conditional compilation som kollar om ett macro är definierat. Skapar en intermidiate .i-fil. 
+
+    Compiling/Kompilering
+    Översätter våra filer med kod till assembly, och kontrollerar att inga syntax errors finns i koden. Skapar .s-filer
+
+    Assembling
+    Översätter assembly-kod till maskinkod, dvs binär eller hexidecimal-form. Skapar en objekt-fil, vilket blir en .o-fil i unix.
+
+    Linking
+    skapar en exekverbar fil, Inkluderar biblioteksfiler och converterar koden till ett körbart program. Biblioteksfilerna innehåller bland annat definitioner för funktioner i maskinkod. 
+    
+    
+Hur fungerar det i java?
+
+    Mycket görs i JVMen
+
+Vad är länkning?
+
+    Slår ihop allting till en körbar fil (.out eller .exe)
+
+Hur fungerar det i c?
+
+    Linking
+    Inkluderar biblioteksfiler och konverterar koden till ett körbart program. 
+    Biblioteksfilerna innehåller bland annat definitioner för funktioner i maskinkod. 
+
+Hur fungerar det i java?
+
+Vad är interpretering?
+    Bara läser av raderna i en fil?
+
+Hur fungerar det i c?
+    Görs inte i c
+
+Hur fungerar det i java?
+    Körs via JVMen under körning
+
+Vad är JIT-kompilering?
+
+    En JIT-kompilator är smart och kan upptäcka om någon process upprepas många gånger.
+    Isf kan processen effetktiviseras. Processorn gör redan detta till viss del, men JIT ännu mer.
+
+Hur fungerar det i c?
+
+    Finns inte.
+
+Hur fungerar det i java?
+
+    Finns JIT-kompilatorer för java som effektiviserar koden och därmed körtiden.
+
+Hur använder man JIT-kompilering?
+
+
+
+
+
+---------------- N41: Bindning ------------------
+
+Vad är statisk bindning?
+
+    Statisk bindning (tidig bindning)
+        - När typen av ett objekt bestäms vid kompilering
+        - Metoder och variabler är statiskt bundna om de är private, final eller static.
+        - Använder sig av Type för bindning
+        - Overloadade funktioner är statiska
+
+Vad är dynamisk bindning?
+
+    Dynamisk bindning (sen bindning)
+        - När typen av ett objekt bestäms vid körning
+        - Använder sig av Object för bindning
+        - Overridade funktioner är dynamiska
+
+    När vi använder arv och subtypspolymorfism, så binds ojekt dynamiskt.
+
+
+Hur påverkas möjligheten att återanvända kod?
+
+    BLir bättre med dynamisk bidning. För att 
+    Med arv med och super-calls kan vi återanvända kod, för att man kan implementera specifika definitioner för samma metod.
+
+Blir det enklare/svårare att resonera om vad kod gör med statisk/dynamisk bindning?
+
+    Blir svårare att hänga med på vad kod gör med dynamisk bindning.
+    Med statisk bindning så ska vi veta vid kompilering vilka funktioner som kallas med vilka argument. 
+    Har vi skrivit något fel så berättar kompilatorn det för oss.
+    
+    Vid dynamisk bindning så sker bindningar av objekt och metoder vid körning. 
+    Vilket betyder att vi kan kompilera program som inte gör det vi vill, om vi gjort fel i klasser osv.
+
+Finns det en prestandaaspekt? Är den relevant?
+
+    Prestandan för dynamiska bindningar är lite sämre, då körningen tar längre tid eftersom att programmet inte vet vilken metod som ska användas redan från början.
+    Tiden för att dynamiskt binda objekt och metoder ackumuleras och kan för stora program bli stor.
+
+Hur binder C?
+
+    C binder statiskt. gcc kompilerar och har sedan en fil som är redo att köras.
+
+Hur binder Java?
+
+    Dynamiskt, där det går. Typen av objekt, vilka metoder som ska användas (om vi har overrides). 
+
+

@@ -1,0 +1,107 @@
+------------- G15: Aliasering  ---------------------
+
+Vad är aliasering?
+
+	Aliasering uppstår när man blandar ihop koncepten identitet och ekvivalens.
+	Specifikt när man skapar objekt som är identiska, och det visar sig inte vara en bra idé.
+	För att man vill ändra på ett av de, men båda råkar ändras.
+
+Vad innebär ägandeskap?
+
+	Vilket object är ansvarig för en viss data?
+	För minneshantering: I C, Vilket objekt är ansvarig för att frigöra minnet?
+	I Java: behöver inte tänka på det, för vi har GC
+	
+	Object access rights: Om vi har ett antal funktioner som opererar på en länkad lista.
+	Är det viktigt att tänka på vilka som ändrar datat? Tex length() ska inte göra det.
+	Men insert() ska ändra något, tar den ägarskap av listan då
+	
+	Inte konkret i C eller Java, som i andra språk som Rust.
+	
+*Var i vår kod undviker vi aliasering?
+
+	Beräknar bara pris vid checkout, ist för att carten har ett pris. 
+	För att om vi ändrar pris på en vara hade vi haft fel pris i cart.
+	
+	
+------------- H18: Jämförelsemetoden -------------------------
+
+*Visa inlupp 4 equals
+
+	Vi har implementerat så att equals för variabler kollar om det är samma namn.
+	Binary kollar om det som det evalueras till är samma sak som other evalueras till.
+
+Vad är relationen mellan equals() och hashcode()?
+
+	Om vi använder hashcode() på två OLIKA objekt, så hashar de till olika saker.
+	Så funkar equals också, om vi inte specifierar (overridar).
+	Så vi vill inte kunna ha två variabler med samma namn i vår hashmap. Därför måste vi overrida hashcode.
+
+Varför bör man definiera en hashcode() om man definierar en equals()?
+
+	För om vi specifierar equals() så att två objekt kan vara ekvivalenta, då måste de hasha till samma sak.
+	
+------------- J28: Manuell vs. automatisk minneshantering ---------
+
+När är ett objekt att betrakta som skräp som kan städas bort?
+
+	När programmet inte längre kan nå objektet. 
+	Alltså inte har något handtag.
+
+När städas skräp bort?
+
+	I C, när vi själva gör det. I Java, när GC kör.
+
+Hur kan jag som programmerare ta reda på när ett visst objekt städats bort?
+	
+	I C, det kan vi inte? Eller sätta det till null när vi frigör?
+	I Java, går inte, för det görs automatiskt när vi inte behöver objektet.
+
+Finns det någon typ av minnesfel som jag kan få i C med pekare som jag inte kan få med referenser i Java?
+	
+	Massor, double free, då vi försöker städa bort samma objekt två gånger.
+	Invalid free, då vi försöker städa bort något vi inte själva allokerat.
+	
+	Invalid read fås om vi försöker läsa av minne vi inte allokerat (som kanske freeats för tidigt)
+	Invalid write fås om vi försöker skriva till plats i minnet vi inte allokerat
+	
+	I Java får vi inget av dessa problem, för att automatisk minneshantering tar hand om det.
+	Så den håller koll på VAD det allokerade minnet är. Och det frigörs först när programmet inte kan komma åt det,
+	och då kan inte vi heller komma åt det (försöka läsa av eller skriva).
+	
+När allokeras minne och hur tar Java reda på hur många bytes ett visst objekt kräver?
+
+	När ett objekt skapas allokeras minne. Javas VM beräknar väl det på något sätt, inte jätteviktigt eftersom vi inte
+	behöver inteagera med det.
+
+Hur tar jag som programmerare reda på hur många bytes ett visst objekt kräver?
+
+	I C kan vi lätt kolla sizeOf. I Java är det som sagt svårt, men vi behöver inte veta.
+	Inget lätt sätt att ta reda på.
+	Man kan fråga JVMen genom Instrumentation eller memory profiler. Overrida finalize-metoder.
+
+Hur fungerar “weak references”? 
+
+	De städas bort när GC kör (sätts till null), och objekten likaså. 
+	Så de är användbara om vi har något som råkar användas snabbt igen efter förra användningen, men är ok om det städas bort.
+
+Hur relaterar de till pekare?
+
+	En weak reference kan inte förstöra objektet den refererar till (som pekare kan)
+	Man kan ha pekare till pekare till pekare osv, men en weak reference kan inte referera till en annan weak reference.
+	Pekare är alltså kraftfullare och kan användas på flera sätt.
+	
+
+*Visa ett lämpligt java-program, när minne allokeras och frigörs.
+
+	Minne allokeras i början när vi skapar en simulation som skapar en store som skapar registers osv.
+	New Customers skapas på slump.
+	När vi kallar på removeCurrentCustomer() i Register så länkar vi ur i deque() i Queue. 
+	Då kommer vi inte ha åtkomst till elementet längre och det frigörs nästa gång GC kör.
+
+
+------------- P46: Gör en informell kodgranskning under fas 2 --------
+
+*Visa filerna vi granskat
+*Visa svaren på frågorna i google docs
+*Visa issues på github

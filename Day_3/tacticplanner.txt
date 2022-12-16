@@ -1,0 +1,4 @@
+1. calculate length of string
+2. divide the string into two strings
+3. for every letter in the first, see if the second one holds the same, if so: return the char
+4. lookup the priority of that char

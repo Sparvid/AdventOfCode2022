@@ -1,0 +1,83 @@
+------------- E11: Parametrisk polymorfism och typsäkerhet  --------
+
+Vad är statisk typsäkerhet?
+
+	Att vi använder objekt på rätt sätt (med tanke på deras typ). Och om detta inte är fallet så upptäcks det vid kompilering.
+	
+Vad är parametrisk polymorfism?
+
+	
+
+Hur kan det användas för att flytta fel från körning till kompilering?
+
+------------- E12: Designa med parametrisk polymorfism -----------
+
+*Visa var parametrisk polymorfism används för att slippa ange en typ vid definitionen.
+
+	Environment.
+
+Vad är type erasure?
+
+	Javas parametriska polymorfism är lite hackig. Den basically type castar som sista steg när vi hämtar ut något.
+	Det betyder att det kan funka att lägga till något ogiltigt, som krashar när kompilatorn försöker type casta det.
+	
+	hashmap h = env;
+	// lägg till något med ogiltig typ för environment
+	// Hämta ut värderna och se att det kompilerar men krashar inte.
+	
+	Under kompilering byter kompilatorn ut alla obundna objekt till typen Object.
+	Så kan man sedan få Classcastexception vid körning.
+
+Hur påverkar det vad jag kan göra med parametrisk polymorfism?
+
+
+
+------------- H20: Värdeöverföring  ------------------------
+
+Vad är värdesemantik?
+
+	Att det är ett objekts värde som betyder något.
+	Och om vi kopierar objektet så är det värdet som kopieras.
+	
+	x = 5
+	y = x
+	x = 7
+	y == 5
+	
+	För att vi kopierade värdet, inte identiteten.
+
+Vad är referenssemantik?
+
+	Då vi kopierar identiteten. Så en variabel håller adressen till det objekt den kopierar.
+	Java har value semantics för primitiva typer och reference semantics for object types.
+
+Vad är parameteröverföring?
+
+	Med värdeövering, om man skickar in ett objekt så kan man ändra på värderna utan att objektet ändras.
+	Call by value, värden som skickas till funktioner KOPIERAS och används sedan. Parametrarna man skickade in påverkas inte.
+	
+	Call by reference. Det vi skickar in påverkas permanent. Detta görs med att skicka in objekt i java eller pekare i c. 
+
+
+När använder man vilken typ av värdeöverföring? 
+
+	Det beror på om man vill ÄNDRA på ett objekt eller bara HÄMTA värderna objektet har.
+
+Fungerar C och Java annorlunda? 
+
+	C har värdesemantik, måste vi själv jobba med pekare för att ha referenssemantik.
+	Java har referenssemantik för objekt, så för att jobba med värden måste vi ha getters.
+	Har mer kontroll (private, public) över information än i C, där man kan göra lite vad som helst.
+
+Finns det fördelar/nackdelar med hur C och Java fungerar?
+
+	Fördel för säkerhet att vi har mer kontroll (och fler kontroller) i Java.
+	Nackdel med C, vi kan inte jobba på stacken och returnera pekare. Då måste vi excplicit spara det på heapen.
+	
+
+*Visa kodexempel
+
+	
+
+
+------------- T55: Använda en utvecklingsmiljö på ett effektivt sätt -----

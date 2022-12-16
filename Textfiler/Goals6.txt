@@ -1,0 +1,70 @@
+--------------- O42: Profilering och optimering 1/3 -------------
+
+Vi har kört olika textfiler genom gprof och fått en analys av var och en
+
+    Vad är lämplig granularitetsnivå på “delarna” som nämns ovan – och varför?
+    
+??? Någon slags snittid för ett anrop av en funktion??
+
+    Hur tar du fram detta data?
+    
+Vi exekverar programmet en gång och kör sedan med verktyget gprof.
+
+    Hur vet du att datat är “rätt”?
+    
+?? Vet ej, vi får lita på att gprof funkar??
+Vi kan resonera utifrån resultatet, och återkoppla om det ser rimligt ut.
+    
+    Hur kan du använda datat?
+    
+Om vi ser att någon specifik funktion tar upp väldigt mycket tid (eller hög procent av tiden),
+så kan vi kolla på funktionen och lista ut (kanske med call graph) varför den tar så lång tid.
+
+
+
+----------- O43: Profilering och optimering 2/3 -----------------
+
+
+Vi såg att get tog upp 99% av tiden.
+
+1. Kan vi optimera get?
+
+Inte riktigt, get har bara en for-loop genom strukturen. Utan att ändra på strukturen kan vi inte göra nåt.
+
+2. kan vi minska hur mycket vi använder get?
+
+JA. I proccess_word används ett par funktioner. Vi kan kolla på i vilken av de som get används.
+Visar sig vara i has_key, som i sin tur använder any (som inte är effektiv). Vi kan gå tillbaka
+till tidigare implementationen med lookup.
+
+ALT
+
+I call graph ser vi hur mycket tid vi spenderar i funktioner som kallas av proccess_word.
+Vi ser att has_key tar upp nästan all tid. Vi kan följa call graphen och se vilka funktioner vi bör kolla på.
+
+PLUS
+
+Vi optimerade genom att ha dynamisk bucket_size. Så när vi når för många entries så ökar vi antalet buckets,
+vilket leder till bättre prestanda.
+
+
+----------- O44: Profilering och optimering 3/3 ------------------------
+
+
+När vi ökar bucket_size så får vi i snitt mindre än 1 entry per bucket. (bra prestanda)
+Men vi har 1 sentinel per bucket, som då kommer ta upp mer minne än alla entries.
+Detta är väldigt ineffektivt för minnet!
+
+Any hämtar keys och hämtar values (skapar två listor för varje ord) i hela hashtable. 
+Gör alltså det 10 000 ggr.
+
+I vår nuvarande implementation har vi fixat båda dessa. Så any kallas inte för varje has_key längre.
+Och vi har gjort oss av med sentinels.
+
+**Kanske finns det någon samband mellan lång exekveringstid och suboptimalt minnesanvändande?
+
+Ja, any
+
+Kan man minska exekveringstiden genom att ändra hur minnet används?
+
+Ja, any
