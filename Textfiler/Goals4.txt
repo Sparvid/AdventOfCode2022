@@ -1,7 +1,0 @@
------------------ R52: Debuggning med gdb ------------------------------------
-
-compilera med -g
-
-få ett segfault, använd gdb
-
------------------ T56: Continuous Integration --------------------------------
