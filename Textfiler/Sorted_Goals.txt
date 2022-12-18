@@ -1,45 +1,29 @@
-------------------------------REDO ATT TAS------------------------------
+----------------------------- SKICKA IN -----------------------------
 
-
-
-
---------------------------- BÖRJA ARBETA MED ----------------------------
-
-C7 (Planering)
-
-T55 (Lär dig använda en editor effektivt)
+C7 (planering)
 V58 (terminalkommandon)
-
 -------5------- J29 (Essä)
 ---4--- X59 (Essä)
 
----------------------------------JAVA---------------------------------------
+--------------------------- PRESENTERA I JAN ----------------------------
 
 E11 (Läs på)
 ---4---	E12 (Läs på)
+T55 (Lär dig använda en editor effektivt)
+Z104 (Inlupp 4)
+
+CEC (kodprov c)
 
 
----4--- H20 (värdesemantik referenssemantik, c vs java)
+-------------------------------- PROJEKT ------------------------------------
 
-
-
-
-
--------5------- X62 (Ta 9/12, förbered innan)
-
-Z104
-
-
----------------------------------FAS 3-------------------------------------
-
-X60
-Y64
-Y65
-Y66
-Y67
-Y68
-Y69
-X61 (möten)
+X60 (duglig presentation)
+Y64 (använd scrum, reflektera i projektrapporten)
+Y65 (Följ en kodstandard) (läs på)
+Y66 (granska varandras kod innan den mergas med main)
+Y67 (individuell reflektion över hur man fungerar i projektgrupp)
+Y68 (fungerande program)
+Y69 (regressionstestning)
 
 
 -------------------------------AVKLARADE----------------------------------
@@ -60,6 +44,7 @@ G16
 -------5-------	G17
 H18
 H19
+---4--- H20
 -------5------- H21
 I23
 ---4--- I24
@@ -87,10 +72,20 @@ Q49
 R52
 -------5------- T56
 U57
+X61
+-------5------- X62
 X63
 Z100
 Z101
 Z103
+LAB1
+LAB2
+LAB3
+LAB4
+LAB5
+LAB6
+LAB7
+JEC
 
 
 
